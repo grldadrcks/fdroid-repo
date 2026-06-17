@@ -34,7 +34,7 @@ jobs:
           cat >> config.yml << EOF
           keystorepass: "${{ secrets.FDROID_KEYSTORE_PASS }}"
           keypass: "${{ secrets.FDROID_KEY_PASS }}"
-          keyalias: "${{ secrets.FDROID_KEY_ALIAS }}"
+          repo_keyalias: "${{ secrets.FDROID_KEY_ALIAS }}"
           EOF
 
       - name: Update F-Droid index
