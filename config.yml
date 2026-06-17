@@ -1,0 +1,5 @@
+repo_url: "https://YOUR_GITHUB_USERNAME.github.io/fdroid-repo"
+repo_name: "Mason's F-Droid Repo"
+repo_description: "Personal F-Droid repository."
+keystore: "keystore.jks"
+# keystorepass, keypass, and keyalias are injected by GitHub Actions from Secrets

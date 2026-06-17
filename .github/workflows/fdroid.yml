@@ -1,0 +1,50 @@
+name: Update F-Droid Repo
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install fdroidserver
+        run: pip install fdroidserver
+
+      - name: Set up keystore
+        run: echo "${{ secrets.FDROID_KEYSTORE }}" | base64 -d > keystore.jks
+
+      - name: Inject keystore credentials into config
+        run: |
+          cat >> config.yml << EOF
+          keystorepass: "${{ secrets.FDROID_KEYSTORE_PASS }}"
+          keypass: "${{ secrets.FDROID_KEY_PASS }}"
+          keyalias: "${{ secrets.FDROID_KEY_ALIAS }}"
+          EOF
+
+      - name: Update F-Droid index
+        run: fdroid update --verbose
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: repo/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
