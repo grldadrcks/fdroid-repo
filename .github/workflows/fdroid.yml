@@ -40,10 +40,13 @@ jobs:
       - name: Update F-Droid index
         run: fdroid update --verbose
 
+      - name: Prepare Pages structure
+        run: mkdir -p pages/fdroid && cp -r repo pages/fdroid/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: repo/
+          path: pages/
 
       - name: Deploy to GitHub Pages
         id: deployment
