@@ -1,0 +1,12 @@
+Categories:
+  - Productivity
+License: Unknown
+AutoName: Feed Estimator
+Summary: Predict dairy farm feed orders with ease
+Description: |
+  Feed Estimator tracks feed deliveries and silo levels across multiple dairy farms,
+  predicts when each farm will run out, and helps plan upcoming orders.
+  All data is stored locally on your device.
+
+CurrentVersion: '1.3'
+CurrentVersionCode: 4
